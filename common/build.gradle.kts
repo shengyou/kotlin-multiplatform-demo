@@ -4,6 +4,7 @@ plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
     id("com.android.library")
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 group = "io.kraftsman"
@@ -22,6 +23,16 @@ kotlin {
                 api(compose.runtime)
                 api(compose.foundation)
                 api(compose.material)
+
+                implementation("io.ktor:ktor-client-core:2.1.2")
+                implementation("io.ktor:ktor-client-cio-jvm:2.1.2")
+                implementation("io.ktor:ktor-client-content-negotiation:2.1.2")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:2.1.2")
+
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
             }
         }
         val commonTest by getting {

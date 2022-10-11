@@ -1,0 +1,20 @@
+package io.kraftsman.server.extensions
+
+import io.kraftsman.common.models.User
+import io.kraftsman.common.responses.UserResponse
+import java.security.MessageDigest
+import java.util.Base64
+
+fun String.md5(): String =
+    MessageDigest.getInstance("MD5")
+        .also {
+            it.update(toByteArray())
+        }.run {
+            String(Base64.getEncoder().encode(digest()))
+        }
+
+fun User.toResponse(): UserResponse =
+    UserResponse(
+        username = username,
+        createDate = createDate,
+    )
