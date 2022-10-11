@@ -1,3 +1,4 @@
+import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.compose.compose
 
 plugins {
@@ -23,6 +24,9 @@ kotlin {
                 api(compose.runtime)
                 api(compose.foundation)
                 api(compose.material)
+                @OptIn(ExperimentalComposeLibrary::class)
+                api(compose.material3)
+                api(compose.materialIconsExtended)
 
                 implementation("io.ktor:ktor-client-core:2.1.2")
                 implementation("io.ktor:ktor-client-cio-jvm:2.1.2")
