@@ -1,0 +1,24 @@
+GET http://localhost:8080/users/list
+
+###
+POST http://localhost:8080/users/signup
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "password": "123456"
+}
+
+###
+GET http://localhost:8080/users/qrcode?username=user1
+Content-Type: image/png
+
+###
+POST http://localhost:8080/users/login
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "password": "123456",
+  "code": "028189"
+}
