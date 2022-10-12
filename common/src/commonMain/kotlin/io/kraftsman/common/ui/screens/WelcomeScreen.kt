@@ -9,7 +9,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import io.kraftsman.common.ui.components.Branding
 import io.kraftsman.common.ui.extensions.supportWideScreen
+import io.kraftsman.common.ui.locales.StringResource
 
 @Composable
 fun WelcomeScreen() {
@@ -25,11 +27,9 @@ fun WelcomeScreen() {
                     .animateContentSize()
             )
 
-            //TODO: update Branding component
-            /*Branding(
-                painter = painterResource(id = R.drawable.ic_logo),
+            Branding(
                 text = StringResource.welcome
-            )*/
+            )
 
             Spacer(
                 modifier = Modifier

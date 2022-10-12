@@ -1,4 +1,4 @@
-package io.kraftsman.common
+package io.kraftsman.common.ui.screens
 
 import androidx.compose.material.Text
 import androidx.compose.material.Button
@@ -7,14 +7,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import io.kraftsman.common.utils.getPlatformName
 
 @Composable
-fun App() {
+fun DemoScreen() {
     var text by remember { mutableStateOf("Hello, World!") }
     val platformName = getPlatformName()
 
     Button(onClick = {
-        text = "Hello, ${platformName}"
+        text = "Hello, $platformName"
     }) {
         Text(text)
     }

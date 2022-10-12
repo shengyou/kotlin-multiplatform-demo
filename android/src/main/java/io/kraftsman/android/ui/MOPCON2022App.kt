@@ -19,7 +19,7 @@ fun MOPCON2022App() {
     val viewModel: MainViewModelImpl = viewModel(
         factory = MainViewModelFactory(
             RestApiImpl(
-                urlString = "https://9287-220-128-121-166.jp.ngrok.io"
+                urlString = "https://7124-36-231-127-172.jp.ngrok.io"
             )
         )
     )
@@ -42,7 +42,7 @@ fun MOPCON2022App() {
         )
 
         NavDestinations.SignUpSucceed -> SignUpSuccessScreen(
-            byteArray = uiState.qrCode,
+            qrcodeUrl = uiState.qrcodeUrl,
             navToSignIn = { viewModel.nav(NavDestinations.SignIn) }
         )
 

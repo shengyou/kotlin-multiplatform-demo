@@ -8,6 +8,5 @@ interface MainViewModel {
     val uiState: StateFlow<MainUiState>
     fun nav(navDestination: NavDestinations)
     fun signUp(username: String, password: String)
-    fun qrcode(username: String)
     fun signIn(username: String, password: String, code: String)
 }

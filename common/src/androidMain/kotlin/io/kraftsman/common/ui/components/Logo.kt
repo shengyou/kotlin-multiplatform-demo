@@ -7,9 +7,17 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-
+import io.kraftsman.common.R
 
 @Composable
-expect fun Logo()
+actual fun Logo() {
+    Image(
+        painter = painterResource(id = R.drawable.mopcon_logo),
+        modifier = Modifier.padding(horizontal = 76.dp)
+            .clip(CircleShape)
+            .size(160.dp),
+        contentDescription = null
+    )
+}

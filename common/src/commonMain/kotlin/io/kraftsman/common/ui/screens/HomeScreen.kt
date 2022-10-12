@@ -11,8 +11,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import io.kraftsman.common.ui.components.Branding
 import io.kraftsman.common.ui.screens.partials.SignInCreateAccount
 import io.kraftsman.common.ui.extensions.supportWideScreen
+import io.kraftsman.common.ui.locales.StringResource
 
 @Composable
 fun HomeScreen(
@@ -31,12 +33,10 @@ fun HomeScreen(
                     .animateContentSize()
             )
 
-            //TODO: update Branding component
-            /*Branding(
+            Branding(
                 modifier = Modifier.fillMaxWidth(),
-                painter = painterResource(id = R.drawable.ic_logo),
                 text = StringResource.MOPCON,
-            )*/
+            )
 
             Spacer(
                 modifier = Modifier

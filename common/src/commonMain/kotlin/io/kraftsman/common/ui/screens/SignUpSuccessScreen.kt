@@ -1,24 +1,22 @@
 package io.kraftsman.common.ui.screens
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import io.kraftsman.common.ui.locales.StringResource
+import io.kraftsman.common.ui.components.QrCode
 import io.kraftsman.common.ui.extensions.supportWideScreen
+import io.kraftsman.common.ui.locales.StringResource
 
 @Composable
 fun SignUpSuccessScreen(
-    byteArray: ByteArray,
-    navToSignIn: () -> Unit
+    qrcodeUrl: String,
+    navToSignIn: () -> Unit,
 ) {
     Surface(modifier = Modifier.supportWideScreen()) {
         Column(
@@ -26,14 +24,17 @@ fun SignUpSuccessScreen(
                 .fillMaxSize(),
             verticalArrangement = Arrangement.Center
         ) {
-            // TODO: update Coil AsyncImage
-            /*AsyncImage(
-                model = byteArray,
-                contentDescription = null,
-                modifier = Modifier
+            Text(
+                text = "Your 2FA QR Code",
+                style = MaterialTheme.typography.titleLarge,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(top = 24.dp)
                     .fillMaxWidth()
-                    .size(256.dp)
-            )*/
+            )
+
+            QrCode(
+                url = qrcodeUrl,
+            )
 
             Button(
                 onClick = navToSignIn,

@@ -5,7 +5,7 @@ import androidx.compose.runtime.Immutable
 @Immutable
 data class MainUiState(
     val currentScreen: NavDestinations = NavDestinations.Home,
-    val qrCode: ByteArray = byteArrayOf()
+    val qrcodeUrl: String = ""
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -14,14 +14,14 @@ data class MainUiState(
         other as MainUiState
 
         if (currentScreen != other.currentScreen) return false
-        if (!qrCode.contentEquals(other.qrCode)) return false
+        if (qrcodeUrl != other.qrcodeUrl) return false
 
         return true
     }
 
     override fun hashCode(): Int {
         var result = currentScreen.hashCode()
-        result = 31 * result + qrCode.contentHashCode()
+        result = 31 * result + qrcodeUrl.hashCode()
         return result
     }
 }

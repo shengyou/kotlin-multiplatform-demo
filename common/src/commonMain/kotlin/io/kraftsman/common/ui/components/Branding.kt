@@ -16,14 +16,13 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun Branding(
     modifier: Modifier = Modifier,
-    painter: Painter,
     text: String,
 ) {
     Column(
         modifier = modifier.wrapContentHeight(align = Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Logo(painter = painter)
+        Logo()
         Text(
             text = text,
             style = MaterialTheme.typography.titleMedium,

@@ -4,21 +4,19 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.kraftsman.common.contracts.MainViewModel
-import io.ktor.util.InternalAPI
-import io.ktor.util.toByteArray
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
 import io.kraftsman.common.contracts.RestApi
 import io.kraftsman.common.requests.UserLoginRequest
 import io.kraftsman.common.requests.UserSignupRequest
 import io.kraftsman.common.ui.states.MainUiState
 import io.kraftsman.common.ui.states.NavDestinations
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 class MainViewModelImpl(
-    private val api: RestApi
+    private val api: RestApi,
 ) : ViewModel(), MainViewModel {
     private val _uiState = MutableStateFlow(MainUiState())
     override val uiState: StateFlow<MainUiState> = _uiState.stateIn(
@@ -43,23 +41,8 @@ class MainViewModelImpl(
                     )
                 )
             }.onSuccess {
-                qrcode(username)
-            }.onFailure {
-                Log.e("MainViewModel", it.toString())
-            }
-        }
-    }
-
-    @OptIn(InternalAPI::class)
-    override fun qrcode(username: String) {
-        viewModelScope.launch {
-            kotlin.runCatching {
-                api.qrcode(
-                    username = username
-                )
-            }.onSuccess {
                 _uiState.value = _uiState.value.copy(
-                    qrCode = it.content.toByteArray()
+                    qrcodeUrl = api.qrcodeUrl(username)
                 )
                 nav(NavDestinations.SignUpSucceed)
             }.onFailure {

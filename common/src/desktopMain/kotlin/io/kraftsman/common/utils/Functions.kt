@@ -1,4 +1,4 @@
-package io.kraftsman.common
+package io.kraftsman.common.utils
 
 actual fun getPlatformName(): String {
     return "Desktop"

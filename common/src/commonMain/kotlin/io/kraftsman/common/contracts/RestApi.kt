@@ -6,6 +6,6 @@ import io.ktor.client.statement.*
 
 interface RestApi {
     suspend fun signup(userSignupReqDTO: UserSignupRequest): HttpResponse
-    suspend fun qrcode(username: String): HttpResponse
+    fun qrcodeUrl(username: String): String
     suspend fun login(userLoginReqDTO: UserLoginRequest): HttpResponse
 }
