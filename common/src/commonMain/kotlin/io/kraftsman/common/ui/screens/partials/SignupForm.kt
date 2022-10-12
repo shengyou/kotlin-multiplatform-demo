@@ -23,8 +23,8 @@ import io.kraftsman.common.ui.states.PasswordState
 import io.kraftsman.common.ui.theme.stronglyDeemphasizedAlpha
 
 @Composable
-fun SignUpContent(
-    onSignUp: (String, String) -> Unit,
+fun SignupForm(
+    onSubmit: (String, String) -> Unit,
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
         val passwordFocusRequest = remember { FocusRequester() }
@@ -47,7 +47,7 @@ fun SignUpContent(
         Password(
             label = StringResource.confirmPassword,
             passwordState = confirmPasswordState,
-            onImeAction = { onSignUp(emailState.text, passwordState.text) },
+            onImeAction = { onSubmit(emailState.text, passwordState.text) },
             modifier = Modifier.focusRequester(confirmationPasswordFocusRequest)
         )
 
@@ -60,7 +60,7 @@ fun SignUpContent(
 
         Spacer(modifier = Modifier.height(16.dp))
         Button(
-            onClick = { onSignUp(emailState.text, passwordState.text) },
+            onClick = { onSubmit(emailState.text, passwordState.text) },
             modifier = Modifier.fillMaxWidth(),
             enabled = emailState.isValid &&
                     passwordState.isValid && confirmPasswordState.isValid

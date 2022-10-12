@@ -1,9 +1,9 @@
 package io.kraftsman.server.handlers
 
-import io.kraftsman.common.models.User
-import io.kraftsman.common.requests.UserLoginRequest
-import io.kraftsman.common.requests.UserSignupRequest
-import io.kraftsman.common.responses.UserResponse
+import io.kraftsman.common.clients.models.User
+import io.kraftsman.common.clients.requests.UserLoginRequest
+import io.kraftsman.common.clients.requests.UserSignupRequest
+import io.kraftsman.common.clients.responses.UserResponse
 import io.kraftsman.server.extensions.md5
 import io.kraftsman.server.extensions.toResponse
 import io.kraftsman.server.utilities.createQrCodeImgBytes

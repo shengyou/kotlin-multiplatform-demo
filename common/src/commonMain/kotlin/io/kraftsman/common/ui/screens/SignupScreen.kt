@@ -8,12 +8,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import io.kraftsman.common.ui.components.TopBar
 import io.kraftsman.common.ui.locales.StringResource
-import io.kraftsman.common.ui.screens.partials.SignUpContent
+import io.kraftsman.common.ui.screens.partials.SignupForm
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpScreen(
-    onSignUp: (String, String) -> Unit,
+fun SignupScreen(
+    onSignup: (String, String) -> Unit,
     onBackPressed: () -> Unit,
 ) {
     Scaffold(
@@ -32,8 +32,8 @@ fun SignUpScreen(
                     .padding(horizontal = 20.dp)
             ) {
                 Column {
-                    SignUpContent(
-                        onSignUp = onSignUp
+                    SignupForm(
+                        onSubmit = onSignup
                     )
                 }
             }

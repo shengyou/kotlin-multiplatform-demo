@@ -1,4 +1,4 @@
-package io.kraftsman.common.responses
+package io.kraftsman.common.clients.responses
 
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable

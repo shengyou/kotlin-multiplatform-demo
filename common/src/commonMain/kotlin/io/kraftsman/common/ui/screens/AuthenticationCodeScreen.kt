@@ -14,9 +14,9 @@ import io.kraftsman.common.ui.extensions.supportWideScreen
 import io.kraftsman.common.ui.locales.StringResource
 
 @Composable
-fun SignUpSuccessScreen(
+fun AuthenticationCodeScreen(
     qrcodeUrl: String,
-    navToSignIn: () -> Unit,
+    navToLogin: () -> Unit,
 ) {
     Surface(modifier = Modifier.supportWideScreen()) {
         Column(
@@ -25,7 +25,7 @@ fun SignUpSuccessScreen(
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Your 2FA QR Code",
+                text = StringResource.setupAuthenticator,
                 style = MaterialTheme.typography.titleLarge,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(top = 24.dp)
@@ -37,14 +37,14 @@ fun SignUpSuccessScreen(
             )
 
             Button(
-                onClick = navToSignIn,
+                onClick = navToLogin,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp)
                     .padding(top = 28.dp, bottom = 3.dp)
             ) {
                 Text(
-                    text = StringResource.signIn,
+                    text = StringResource.login,
                     style = MaterialTheme.typography.titleSmall
                 )
             }

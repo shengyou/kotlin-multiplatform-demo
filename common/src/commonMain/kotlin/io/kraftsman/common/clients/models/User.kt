@@ -1,4 +1,4 @@
-package io.kraftsman.common.models
+package io.kraftsman.common.clients.models
 
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.Serializable

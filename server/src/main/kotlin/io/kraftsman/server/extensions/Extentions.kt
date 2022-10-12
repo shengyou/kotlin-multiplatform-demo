@@ -1,7 +1,7 @@
 package io.kraftsman.server.extensions
 
-import io.kraftsman.common.models.User
-import io.kraftsman.common.responses.UserResponse
+import io.kraftsman.common.clients.models.User
+import io.kraftsman.common.clients.responses.UserResponse
 import java.security.MessageDigest
 import java.util.Base64
 

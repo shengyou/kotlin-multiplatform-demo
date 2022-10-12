@@ -2,13 +2,13 @@ package io.kraftsman.android
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import io.kraftsman.common.contracts.RestApi
+import io.kraftsman.common.contracts.MopconClientContract
 
-class MainViewModelFactory(
-    private val api: RestApi
+class AppViewModelFactory(
+    private val client: MopconClientContract
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return MainViewModelImpl(api) as T
+        return AppViewModel(client) as T
     }
 }

@@ -1,10 +1,9 @@
-package io.kraftsman.common.requests
+package io.kraftsman.common.clients.requests
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class UserLoginRequest(
+data class UserSignupRequest(
     val username: String,
     val password: String,
-    val code: String,
 )

@@ -40,8 +40,7 @@ fun Password(
             passwordState.text = it
             passwordState.enableShowErrors()
         },
-        modifier = modifier
-            .fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
             .onFocusChanged { focusState ->
                 passwordState.onFocusChange(focusState.isFocused)
                 if (!focusState.isFocused) {

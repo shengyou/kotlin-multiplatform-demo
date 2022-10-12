@@ -12,12 +12,12 @@ import androidx.compose.ui.unit.dp
 import io.kraftsman.common.ui.components.*
 import io.kraftsman.common.ui.extensions.supportWideScreen
 import io.kraftsman.common.ui.locales.StringResource
-import io.kraftsman.common.ui.screens.partials.SignInContent
+import io.kraftsman.common.ui.screens.partials.LoginForm
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignInScreen(
-    onSignIn: (String, String, String) -> Unit,
+fun LoginScreen(
+    onLogin: (String, String, String) -> Unit,
     onBackPressed: () -> Unit,
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
@@ -26,7 +26,7 @@ fun SignInScreen(
         modifier = Modifier.supportWideScreen(),
         topBar = {
             TopBar(
-                topAppBarText = StringResource.signIn,
+                topAppBarText = StringResource.login,
                 onBackPressed = onBackPressed
             )
         },
@@ -39,8 +39,8 @@ fun SignInScreen(
                     .padding(horizontal = 20.dp)
             ) {
                 Column(modifier = Modifier.fillMaxWidth()) {
-                    SignInContent(
-                        onSignIn = onSignIn
+                    LoginForm(
+                        onSubmit = onLogin
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                 }

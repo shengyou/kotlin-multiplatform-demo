@@ -3,38 +3,38 @@ package io.kraftsman.android
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import io.kraftsman.common.contracts.MainViewModel
-import io.kraftsman.common.contracts.RestApi
-import io.kraftsman.common.requests.UserLoginRequest
-import io.kraftsman.common.requests.UserSignupRequest
-import io.kraftsman.common.ui.states.MainUiState
-import io.kraftsman.common.ui.states.NavDestinations
+import io.kraftsman.common.contracts.AppViewModelContract
+import io.kraftsman.common.contracts.MopconClientContract
+import io.kraftsman.common.clients.requests.UserLoginRequest
+import io.kraftsman.common.clients.requests.UserSignupRequest
+import io.kraftsman.common.ui.states.AppState
+import io.kraftsman.common.ui.screens.Screen
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class MainViewModelImpl(
-    private val api: RestApi,
-) : ViewModel(), MainViewModel {
-    private val _uiState = MutableStateFlow(MainUiState())
-    override val uiState: StateFlow<MainUiState> = _uiState.stateIn(
+class AppViewModel(
+    private val client: MopconClientContract,
+) : ViewModel(), AppViewModelContract {
+    private val _uiState = MutableStateFlow(AppState())
+    override val uiState: StateFlow<AppState> = _uiState.stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(5_000),
-        MainUiState()
+        AppState()
     )
 
-    override fun nav(navDestination: NavDestinations) {
+    override fun navigateTo(screen: Screen) {
         _uiState.value = _uiState.value.copy(
-            currentScreen = navDestination
+            currentScreen = screen
         )
     }
 
-    override fun signUp(username: String, password: String) {
+    override fun signup(username: String, password: String) {
         viewModelScope.launch {
             kotlin.runCatching {
-                api.signup(
+                client.signup(
                     UserSignupRequest(
                         username = username,
                         password = password
@@ -42,19 +42,19 @@ class MainViewModelImpl(
                 )
             }.onSuccess {
                 _uiState.value = _uiState.value.copy(
-                    qrcodeUrl = api.qrcodeUrl(username)
+                    qrcodeUrl = client.qrcodeUrl(username)
                 )
-                nav(NavDestinations.SignUpSucceed)
+                navigateTo(Screen.AuthenticationCode)
             }.onFailure {
                 Log.e("MainViewModel", it.toString())
             }
         }
     }
 
-    override fun signIn(username: String, password: String, code: String) {
+    override fun login(username: String, password: String, code: String) {
         viewModelScope.launch {
             kotlin.runCatching {
-                api.login(
+                client.login(
                     UserLoginRequest(
                         username = username,
                         password = password,
@@ -62,7 +62,7 @@ class MainViewModelImpl(
                     )
                 )
             }.onSuccess {
-                nav(NavDestinations.Welcome)
+                navigateTo(Screen.Home)
             }.onFailure {
                 Log.e("MainViewModel", it.toString())
             }

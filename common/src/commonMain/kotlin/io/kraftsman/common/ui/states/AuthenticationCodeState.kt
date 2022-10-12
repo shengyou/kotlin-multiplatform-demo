@@ -1,9 +1,9 @@
 package io.kraftsman.common.ui.states
 
 // Consider a verification code valid
-private const val VERIFICATION_CODE_VALIDATION_REGEX = "^\\d{6}\$"
+private const val AUTHENTICATION_CODE_VALIDATION_REGEX = "^\\d{6}\$"
 
-class VerificationCodeState :
+class AuthenticationCodeState :
     TextFieldState(validator = ::isCodeValid, errorFor = ::codeValidationError)
 
 /**
@@ -14,5 +14,5 @@ private fun codeValidationError(code: String): String {
 }
 
 private fun isCodeValid(code: String): Boolean {
-    return VERIFICATION_CODE_VALIDATION_REGEX.toRegex().matches(code)
+    return AUTHENTICATION_CODE_VALIDATION_REGEX.toRegex().matches(code)
 }

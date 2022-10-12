@@ -20,11 +20,11 @@ import io.kraftsman.common.ui.locales.StringResource
 import io.kraftsman.common.ui.states.EmailState
 import io.kraftsman.common.ui.states.EmailStateSaver
 import io.kraftsman.common.ui.states.PasswordState
-import io.kraftsman.common.ui.states.VerificationCodeState
+import io.kraftsman.common.ui.states.AuthenticationCodeState
 
 @Composable
-fun SignInContent(
-    onSignIn: (String, String, String) -> Unit
+fun LoginForm(
+    onSubmit: (String, String, String) -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -35,10 +35,10 @@ fun SignInContent(
             mutableStateOf(EmailState())
         }
         val passwordState = remember { PasswordState() }
-        val codeState = remember { VerificationCodeState() }
+        val codeState = remember { AuthenticationCodeState() }
         val onSubmit = {
             if (emailState.isValid && passwordState.isValid && codeState.isValid) {
-                onSignIn(emailState.text, passwordState.text, codeState.text)
+                onSubmit(emailState.text, passwordState.text, codeState.text)
             }
         }
 
@@ -53,7 +53,7 @@ fun SignInContent(
         )
         Spacer(modifier = Modifier.height(16.dp))
         Password(
-            label = StringResource.verificationCode,
+            label = StringResource.authenticationCode,
             passwordState = codeState,
             modifier = Modifier.focusRequester(focusRequester),
             onImeAction = { onSubmit() }
@@ -67,7 +67,7 @@ fun SignInContent(
             enabled = emailState.isValid && passwordState.isValid && codeState.isValid
         ) {
             Text(
-                text = StringResource.signIn
+                text = StringResource.login
             )
         }
     }
