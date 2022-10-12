@@ -1,4 +1,4 @@
-package io.kraftsman.android
+package io.kraftsman.android.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

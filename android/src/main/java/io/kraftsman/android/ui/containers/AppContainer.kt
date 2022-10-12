@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
-import io.kraftsman.android.AppViewModel
-import io.kraftsman.android.AppViewModelFactory
+import io.kraftsman.android.viewmodels.AppViewModel
+import io.kraftsman.android.factories.AppViewModelFactory
 import io.kraftsman.common.clients.MopconClient
 import io.kraftsman.common.ui.screens.*
 

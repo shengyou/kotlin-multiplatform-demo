@@ -1,7 +1,8 @@
-package io.kraftsman.android
+package io.kraftsman.android.factories
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import io.kraftsman.android.viewmodels.AppViewModel
 import io.kraftsman.common.contracts.MopconClientContract
 
 class AppViewModelFactory(
