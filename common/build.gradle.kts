@@ -48,6 +48,15 @@ kotlin {
             dependencies {
                 api("androidx.appcompat:appcompat:1.2.0")
                 api("androidx.core:core-ktx:1.3.1")
+
+                api("androidx.compose.foundation:foundation:1.2.1")
+                api("androidx.compose.material3:material3:1.0.0-beta03")
+                api("androidx.compose.material:material:1.2.1")
+                api("androidx.compose.material:material-icons-extended:1.2.1")
+                api("androidx.compose.ui:ui-tooling:1.2.1")
+                api("androidx.compose.ui:ui-tooling-preview:1.2.1")
+                api("androidx.compose.ui:ui:1.2.1")
+                api("androidx.compose.runtime:runtime:1.2.1")
             }
         }
         val androidTest by getting {

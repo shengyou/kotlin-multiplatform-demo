@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.MOPCON2022" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.MOPCON2022" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="windowActionBar">true</item>
+    </style>
 </resources>

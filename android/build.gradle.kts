@@ -14,15 +14,6 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.6.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
 
-    api("androidx.compose.foundation:foundation:1.2.1")
-    api("androidx.compose.material3:material3:1.0.0-beta03")
-    api("androidx.compose.material:material:1.2.1")
-    api("androidx.compose.material:material-icons-extended:1.2.1")
-    debugApi("androidx.compose.ui:ui-tooling:1.2.1")
-    api("androidx.compose.ui:ui-tooling-preview:1.2.1")
-    api("androidx.compose.ui:ui:1.2.1")
-    api("androidx.compose.runtime:runtime:1.2.1")
-
     implementation("androidx.compose.ui:ui-tooling-preview:1.2.1")
     debugImplementation("androidx.compose.ui:ui-tooling:1.2.1")
 
