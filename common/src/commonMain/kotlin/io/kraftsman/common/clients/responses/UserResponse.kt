@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class UserResponse(
-    val username: String,
-    val createDate: LocalDateTime,
+    val email: String,
+    val createdAt: LocalDateTime,
 )

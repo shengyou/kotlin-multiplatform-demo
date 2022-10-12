@@ -36,7 +36,7 @@ class AppViewModel(
             kotlin.runCatching {
                 client.signup(
                     UserSignupRequest(
-                        username = username,
+                        email = username,
                         password = password
                     )
                 )
@@ -56,9 +56,9 @@ class AppViewModel(
             kotlin.runCatching {
                 client.login(
                     UserLoginRequest(
-                        username = username,
+                        email = username,
                         password = password,
-                        code = code
+                        authenticationCode = code
                     )
                 )
             }.onSuccess {

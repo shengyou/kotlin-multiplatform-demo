@@ -8,7 +8,6 @@ import io.ktor.server.routing.*
 import io.kraftsman.server.handlers.signup
 import io.kraftsman.server.handlers.qrcode
 import io.kraftsman.server.handlers.login
-import io.ktor.server.response.*
 
 fun Application.configureTwoFactorAuth() {
     routing {

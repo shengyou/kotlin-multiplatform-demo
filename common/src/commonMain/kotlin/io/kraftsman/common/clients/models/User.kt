@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class User(
-    val username: String,
+    val email: String,
     val passwordHash: String,
     val secret: String,
-    val createDate: LocalDateTime,
+    val createdAt: LocalDateTime,
 )

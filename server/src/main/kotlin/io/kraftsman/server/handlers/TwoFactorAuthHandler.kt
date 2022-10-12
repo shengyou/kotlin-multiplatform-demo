@@ -20,10 +20,10 @@ import kotlinx.datetime.toLocalDateTime
 private val dataMap = mutableMapOf<String, User>()
 
 suspend fun list(call: ApplicationCall) = run {
-    val users = dataMap.map { (username, user) ->
+    val users = dataMap.map { (email, user) ->
         UserResponse(
-            username = username,
-            createDate = user.createDate,
+            email = email,
+            createdAt = user.createdAt,
         )
     }
     call.respond(HttpStatusCode.OK, mapOf("users" to users))
@@ -32,26 +32,26 @@ suspend fun list(call: ApplicationCall) = run {
 suspend fun signup(call: ApplicationCall) =
     run {
         val userSignupRequest = call.receive<UserSignupRequest>()
-        if (dataMap.containsKey(userSignupRequest.username)) {
+        if (dataMap.containsKey(userSignupRequest.email)) {
             call.respond(HttpStatusCode.BadRequest, mapOf("message" to "Username Existed"))
         } else {
-            dataMap[userSignupRequest.username] = User(
-                username = userSignupRequest.username,
+            dataMap[userSignupRequest.email] = User(
+                email = userSignupRequest.email,
                 passwordHash = userSignupRequest.password.md5(),
                 secret = createSecret(),
-                createDate = Clock.System.now().toLocalDateTime(TimeZone.UTC),
+                createdAt = Clock.System.now().toLocalDateTime(TimeZone.UTC),
             )
 
-            call.respond(HttpStatusCode.OK, dataMap[userSignupRequest.username]!!.toResponse())
+            call.respond(HttpStatusCode.OK, dataMap[userSignupRequest.email]!!.toResponse())
         }
     }
 
 suspend fun qrcode(call: ApplicationCall) =
     run {
-        val user = dataMap[call.request.queryParameters["username"]]!!
+        val user = dataMap[call.request.queryParameters["email"]]!!
 
         val bytes = createQrCodeImgBytes(
-            username = user.username,
+            username = user.email,
             secret = user.secret,
         )
 
@@ -66,18 +66,30 @@ suspend fun login(call: ApplicationCall) =
     run {
         val userLoginRequest = call.receive<UserLoginRequest>()
 
-        if (!dataMap.containsKey(userLoginRequest.username)) {
-            call.respond(HttpStatusCode.BadRequest, mapOf("message" to "User does not exist"))
+        if (!dataMap.containsKey(userLoginRequest.email)) {
+            call.respond(
+                status = HttpStatusCode.BadRequest,
+                message = mapOf("message" to "User does not exist")
+            )
         }
 
-        val user = dataMap[userLoginRequest.username]!!
+        val user = dataMap[userLoginRequest.email]!!
         if (userLoginRequest.password.md5() != user.passwordHash) {
-            call.respond(HttpStatusCode.BadRequest, mapOf("message" to "Username / Password Not Matched"))
+            call.respond(
+                status = HttpStatusCode.BadRequest,
+                message = mapOf("message" to "Username / Password Not Matched")
+            )
         }
 
-        if (!verifyCode(user.secret, userLoginRequest.code)) {
-            call.respond(HttpStatusCode.BadRequest, mapOf("message" to "Wrong 2FA Code"))
+        if (!verifyCode(user.secret, userLoginRequest.authenticationCode)) {
+            call.respond(
+                status = HttpStatusCode.BadRequest,
+                message = mapOf("message" to "Wrong 2FA Code")
+            )
         }
 
-        call.respond(HttpStatusCode.OK, user.toResponse())
+        call.respond(
+            status = HttpStatusCode.OK,
+            message = user.toResponse()
+        )
     }

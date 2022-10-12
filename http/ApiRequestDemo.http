@@ -5,12 +5,12 @@ POST http://localhost:8080/users/signup
 Content-Type: application/json
 
 {
-  "username": "user1",
+  "email": "user1@example.com",
   "password": "123456"
 }
 
 ###
-GET http://localhost:8080/users/qrcode?username=user1
+GET http://localhost:8080/users/qrcode?email=user1@example.com
 Content-Type: image/png
 
 ###
@@ -18,7 +18,7 @@ POST http://localhost:8080/users/login
 Content-Type: application/json
 
 {
-  "username": "user1",
+  "email": "user1@example.com",
   "password": "123456",
-  "code": "028189"
+  "authenticationCode": "000000"
 }

@@ -15,6 +15,6 @@ fun String.md5(): String =
 
 fun User.toResponse(): UserResponse =
     UserResponse(
-        username = username,
-        createDate = createDate,
+        email = email,
+        createdAt = createdAt,
     )

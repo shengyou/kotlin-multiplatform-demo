@@ -31,14 +31,14 @@ class MopconClient(
             contentType(ContentType.Application.Json)
         }.body()
 
-    override suspend fun qrcode(username: String): ByteArray =
+    override suspend fun qrcode(email: String): ByteArray =
         httpClient.get("/users/qrcode") {
-            parameter("username", username)
+            parameter("email", email)
             contentType(ContentType.Image.PNG)
         }.body()
 
-    override fun qrcodeUrl(username: String): String =
-        "$urlString/users/qrcode?username=$username"
+    override fun qrcodeUrl(email: String): String =
+        "$urlString/users/qrcode?email=$email"
 
     override suspend fun login(userLoginRequest: UserLoginRequest): UserResponse =
         httpClient.post("/users/login") {
