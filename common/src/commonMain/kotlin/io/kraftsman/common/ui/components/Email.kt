@@ -24,6 +24,7 @@ fun Email(
 ) {
     OutlinedTextField(
         value = emailState.text,
+        singleLine = true,
         onValueChange = {
             emailState.text = it
         },

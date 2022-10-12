@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import io.kraftsman.common.ui.components.QrCode
+import io.kraftsman.common.ui.components.AuthenticationCode
 import io.kraftsman.common.ui.extensions.supportWideScreen
 import io.kraftsman.common.ui.locales.StringResource
 
@@ -32,7 +32,7 @@ fun AuthenticationCodeScreen(
                     .fillMaxWidth()
             )
 
-            QrCode(
+            AuthenticationCode(
                 url = qrcodeUrl,
             )
 

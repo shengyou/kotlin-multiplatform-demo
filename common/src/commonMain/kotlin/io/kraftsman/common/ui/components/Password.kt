@@ -36,6 +36,7 @@ fun Password(
     val showPassword = rememberSaveable { mutableStateOf(false) }
     OutlinedTextField(
         value = passwordState.text,
+        singleLine = true,
         onValueChange = {
             passwordState.text = it
             passwordState.enableShowErrors()

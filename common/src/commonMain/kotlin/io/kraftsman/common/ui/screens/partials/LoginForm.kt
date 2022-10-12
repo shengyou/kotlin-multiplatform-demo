@@ -24,18 +24,21 @@ import io.kraftsman.common.ui.states.AuthenticationCodeState
 
 @Composable
 fun LoginForm(
-    onSubmit: (String, String, String) -> Unit
+    onSubmit: (String, String, String) -> Unit,
 ) {
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        val focusRequester = remember { FocusRequester() }
+        val passwordFocusRequest = remember { FocusRequester() }
+        val authenticationCodeFocusRequest = remember { FocusRequester() }
+
         val emailState by rememberSaveable(stateSaver = EmailStateSaver) {
             mutableStateOf(EmailState())
         }
         val passwordState = remember { PasswordState() }
         val codeState = remember { AuthenticationCodeState() }
+
         val onSubmit = {
             if (emailState.isValid && passwordState.isValid && codeState.isValid) {
                 onSubmit(emailState.text, passwordState.text, codeState.text)
@@ -43,28 +46,48 @@ fun LoginForm(
         }
 
         Spacer(modifier = Modifier.height(16.dp))
-        Email(emailState = emailState, imeAction = ImeAction.Done, onImeAction = onSubmit)
+
+        Email(
+            emailState = emailState,
+            onImeAction = {
+                passwordFocusRequest.requestFocus()
+            }
+        )
+
         Spacer(modifier = Modifier.height(16.dp))
+
         Password(
             label = StringResource.password,
             passwordState = passwordState,
-            modifier = Modifier.focusRequester(focusRequester),
-            onImeAction = { onSubmit() }
+            modifier = Modifier.focusRequester(passwordFocusRequest),
+            onImeAction = {
+                authenticationCodeFocusRequest.requestFocus()
+            }
         )
+
         Spacer(modifier = Modifier.height(16.dp))
+
         Password(
             label = StringResource.authenticationCode,
             passwordState = codeState,
-            modifier = Modifier.focusRequester(focusRequester),
-            onImeAction = { onSubmit() }
+            modifier = Modifier.focusRequester(authenticationCodeFocusRequest),
+            onImeAction = {
+                onSubmit()
+            }
         )
+
         Spacer(modifier = Modifier.height(16.dp))
+
         Button(
-            onClick = { onSubmit() },
+            onClick = {
+                onSubmit()
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 16.dp),
-            enabled = emailState.isValid && passwordState.isValid && codeState.isValid
+            enabled = emailState.isValid &&
+                    passwordState.isValid &&
+                    codeState.isValid
         ) {
             Text(
                 text = StringResource.login

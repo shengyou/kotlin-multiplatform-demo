@@ -2,7 +2,6 @@ package io.kraftsman.common.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -19,7 +18,7 @@ import io.kamel.image.KamelImage
 import io.kamel.image.lazyPainterResource
 
 @Composable
-fun QrCode(
+fun AuthenticationCode(
     url: String
 ) {
     Box(

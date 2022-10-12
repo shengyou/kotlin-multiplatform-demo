@@ -29,41 +29,58 @@ fun SignupForm(
     Column(modifier = Modifier.fillMaxWidth()) {
         val passwordFocusRequest = remember { FocusRequester() }
         val confirmationPasswordFocusRequest = remember { FocusRequester() }
+
         val emailState = remember { EmailState() }
-        Email(emailState, onImeAction = { passwordFocusRequest.requestFocus() })
+        val passwordState = remember { PasswordState() }
+        val confirmPasswordState = remember { ConfirmPasswordState(passwordState = passwordState) }
+
+        Email(
+            emailState = emailState,
+            onImeAction = {
+                passwordFocusRequest.requestFocus()
+            }
+        )
 
         Spacer(modifier = Modifier.height(16.dp))
-        val passwordState = remember { PasswordState() }
+
         Password(
             label = StringResource.password,
             passwordState = passwordState,
             imeAction = ImeAction.Next,
-            onImeAction = { confirmationPasswordFocusRequest.requestFocus() },
+            onImeAction = {
+                confirmationPasswordFocusRequest.requestFocus()
+            },
             modifier = Modifier.focusRequester(passwordFocusRequest)
         )
 
         Spacer(modifier = Modifier.height(16.dp))
-        val confirmPasswordState = remember { ConfirmPasswordState(passwordState = passwordState) }
+
         Password(
             label = StringResource.confirmPassword,
             passwordState = confirmPasswordState,
-            onImeAction = { onSubmit(emailState.text, passwordState.text) },
+            onImeAction = {
+                onSubmit(emailState.text, passwordState.text)
+            },
             modifier = Modifier.focusRequester(confirmationPasswordFocusRequest)
         )
 
         Spacer(modifier = Modifier.height(16.dp))
+
         Text(
             text = StringResource.termsAndConditions,
             style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = stronglyDeemphasizedAlpha)
+            color = MaterialTheme.colorScheme.onSurface
+                .copy(alpha = stronglyDeemphasizedAlpha)
         )
 
         Spacer(modifier = Modifier.height(16.dp))
+
         Button(
             onClick = { onSubmit(emailState.text, passwordState.text) },
             modifier = Modifier.fillMaxWidth(),
             enabled = emailState.isValid &&
-                    passwordState.isValid && confirmPasswordState.isValid
+                    passwordState.isValid &&
+                    confirmPasswordState.isValid
         ) {
             Text(text = StringResource.createAccount)
         }
