@@ -3,13 +3,11 @@ package io.kraftsman.desktop.ui.containers
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import io.kraftsman.desktop.viewmodels.AppViewModel
-import io.kraftsman.common.clients.MopconClient
 import io.kraftsman.common.ui.screens.*
+import io.kraftsman.desktop.viewmodels.AppViewModel
 
 @Composable
-fun AppContainer() {
-    val viewModel = AppViewModel(MopconClient())
+fun AppContainer(viewModel: AppViewModel) {
     val uiState by viewModel.uiState.collectAsState()
 
     when (uiState.currentScreen) {

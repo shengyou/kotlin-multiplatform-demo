@@ -6,9 +6,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.*
+import io.kraftsman.common.clients.MopconClient
 import io.kraftsman.desktop.ui.containers.AppContainer
+import io.kraftsman.desktop.viewmodels.AppViewModel
 
 fun main() = application {
+    val viewModel = AppViewModel(MopconClient())
+
     Window(
         onCloseRequest = ::exitApplication,
         title = "MOPCON Demo App",
@@ -22,7 +26,7 @@ fun main() = application {
                 modifier = Modifier.fillMaxSize(),
                 color = MaterialTheme.colorScheme.background
             ) {
-                AppContainer()
+                AppContainer(viewModel)
             }
         }
     }
