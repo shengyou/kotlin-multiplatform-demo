@@ -3,7 +3,7 @@
     <option name="ALTERNATIVE_JRE_PATH" value="17" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="MAIN_CLASS_NAME" value="io.kraftsman.server.ApplicationKt" />
-    <module name="compose-multiplatform-demo.server.main" />
+    <module name="kotlin-multiplatform-demo.server.main" />
     <shortenClasspath name="NONE" />
     <method v="2">
       <option name="Make" enabled="true" />
