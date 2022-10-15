@@ -15,7 +15,7 @@ private val defaultCodeVerifier = DefaultCodeVerifier(defaultCodeGenerator, syst
 
 fun createSecret(): String = secretGenerator.generate()
 
-fun createQrCodeImgBytes(
+fun createQrCodeImageBytes(
     username: String,
     secret: String,
 ): ByteArray =

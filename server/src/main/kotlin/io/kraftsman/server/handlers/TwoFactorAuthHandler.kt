@@ -6,7 +6,7 @@ import io.kraftsman.common.clients.requests.UserSignupRequest
 import io.kraftsman.common.clients.responses.UserResponse
 import io.kraftsman.server.extensions.md5
 import io.kraftsman.server.extensions.toResponse
-import io.kraftsman.server.utilities.createQrCodeImgBytes
+import io.kraftsman.server.utilities.createQrCodeImageBytes
 import io.kraftsman.server.utilities.createSecret
 import io.kraftsman.server.utilities.verifyCode
 import io.ktor.http.*
@@ -33,7 +33,10 @@ suspend fun signup(call: ApplicationCall) =
     run {
         val userSignupRequest = call.receive<UserSignupRequest>()
         if (dataMap.containsKey(userSignupRequest.email)) {
-            call.respond(HttpStatusCode.BadRequest, mapOf("message" to "Username Existed"))
+            call.respond(
+                status = HttpStatusCode.BadRequest,
+                message = mapOf("message" to "Username Existed")
+            )
         } else {
             dataMap[userSignupRequest.email] = User(
                 email = userSignupRequest.email,
@@ -42,7 +45,10 @@ suspend fun signup(call: ApplicationCall) =
                 createdAt = Clock.System.now().toLocalDateTime(TimeZone.UTC),
             )
 
-            call.respond(HttpStatusCode.OK, dataMap[userSignupRequest.email]!!.toResponse())
+            call.respond(
+                status = HttpStatusCode.OK,
+                message = dataMap[userSignupRequest.email]!!.toResponse()
+            )
         }
     }
 
@@ -50,7 +56,7 @@ suspend fun qrcode(call: ApplicationCall) =
     run {
         val user = dataMap[call.request.queryParameters["email"]]!!
 
-        val bytes = createQrCodeImgBytes(
+        val bytes = createQrCodeImageBytes(
             username = user.email,
             secret = user.secret,
         )

@@ -21,7 +21,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = "compose-multiplatform-demo"
+rootProject.name = "kotlin-multiplatform-demo"
 
 include(":android")
 include(":desktop")
